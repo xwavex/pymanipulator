@@ -4,10 +4,12 @@ from manipulation.grip.robotiq85 import rtq85nm
 from manipulation.grip import freegrip
 from pandaplotutils import pandactrl
 
+object_name = "plane"
+
 base = pandactrl.World(camp=[700, 300, 700], lookatp=[0, 0, 100])
 this_dir, this_filename = os.path.split(__file__)
 print(this_dir)
-objpath = os.path.join(this_dir, "../manipulation/grip/objects", "planerearstay22.stl")
+objpath = os.path.join(this_dir, "../manipulation/grip/objects", object_name + ".stl")
 handpkg = rtq85nm
 
 freegriptst = freegrip.Freegrip(objpath, handpkg, readser=False, torqueresist = 50)
@@ -21,7 +23,7 @@ freegriptst.segShow(base, togglesamples=False, togglenormals=False,
 # gdb = db.GraspDB()
 # freegriptst.saveToDB(gdb)
 #
-# data = gdb.loadFreeAirGrip('planerearstay22', 'rtq85')
+# data = gdb.loadFreeAirGrip(object_name, 'rtq85')
 # if data:
 #     freegripid, freegripcontacts, freegripnormals, freegriprotmats, freegripjawwidth = data
 #     print(len(freegripid))
@@ -34,8 +36,8 @@ freegriptst.segShow(base, togglesamples=False, togglenormals=False,
 
 
 def updateshow(task):
-    freegriptst.removeFgrpccShow(base)
-    # freegriptst.removeFgrpccShowLeft(base)
+    # freegriptst.removeFgrpccShow(base)
+    freegriptst.removeFgrpccShowLeft(base)
     # freegriptst.removeHndccShow(base)
     return task.again
 taskMgr.doMethodLater(.1, updateshow, "tickTask")
