@@ -127,14 +127,14 @@ class DDRRTConnect(object):
         while True:
 
             if itercount > self.__maxiter:
-                print "failed to find a path"
+                print("failed to find a path")
                 break
 
             # if self.__starttreesamplerate < 80:
             #     self.__starttreesamplerate += itercount/float(self.__maxiter)*10
             # else:
             #     self.__starttreesamplerate = 80
-            # print self.__starttreesamplerate
+            # print(self.__starttreesamplerate)
 
             # Random Sampling
             randpoint = []

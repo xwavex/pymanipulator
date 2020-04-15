@@ -17,7 +17,7 @@ import copy
 
 from utils import designpattern
 
-import rtq85
+from . import rtq85
 
 class Rtq85NM():
     '''
@@ -47,7 +47,7 @@ class Rtq85NM():
         date: 20160627
         '''
         self.rtq85np = NodePath("rtq85hnd")
-        self.handnp = self.rtq85np
+        # self.handnp = self.rtq85np
         self.jawwidth = jawwidth
 
         this_dir, this_filename = os.path.split(__file__)
@@ -219,7 +219,7 @@ class Rtq85NM():
             rotiknuckle=41-math.asin((jawwidth/2.0-5)/57.15)*180/math.pi
         else:
             rotiknuckle=41+math.asin((5-jawwidth/2.0)/57.15)*180/math.pi
-        # print rotiknuckle
+        # print(rotiknuckle)
 
         # right finger
         rtq85irknuckle = self.rtq85np.find("**/rtq85irknuckle")
@@ -420,15 +420,15 @@ if __name__=='__main__':
         # result = base.world.contactTestPair(bcollidernp.node(), lftcollidernp.node())
         # result1 = base.world.contactTestPair(bcollidernp.node(), ilkcollidernp.node())
         # result2 = base.world.contactTestPair(lftcollidernp.node(), ilkcollidernp.node())
-        # print result
-        # print result.getContacts()
-        # print result1
-        # print result1.getContacts()
-        # print result2
-        # print result2.getContacts()
+        # print(result)
+        # print(result.getContacts())
+        # print(result1)
+        # print(result1.getContacts())
+        # print(result2)
+        # print(result2.getContacts())
         # for contact in result.getContacts():
         #     cp = contact.getManifoldPoint()
-        #     print cp.getLocalPointA()
+        #     print(cp.getLocalPointA())
         return task.cont
 
     base = pandactrl.World(lookatp=[0,0,0])
@@ -514,13 +514,13 @@ if __name__=='__main__':
 
     base.taskMgr.add(updateworld, "updateworld", extraArgs=[base.world], appendTask=True)
     result = base.world.contactTestPair(ilkbullnode, lftbullnode)
-    print result
-    print result.getContacts()
+    print(result)
+    print(result.getContacts())
     import pandaplotutils.pandageom as pandageom
     pggen = pandageom.PandaGeomGen()
     for contact in result.getContacts():
         cp = contact.getManifoldPoint()
-        print cp.getLocalPointA()
+        print(cp.getLocalPointA())
         pggen.plotSphere(base, pos=cp.getLocalPointA(), radius=10, rgba=Vec4(1,0,0,1))
 
         pggen.plotAxisSelf(base.render, spos = Vec3(0,0,0))

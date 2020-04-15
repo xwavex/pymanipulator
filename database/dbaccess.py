@@ -8,7 +8,7 @@ from panda3d.core import *
 class GraspDB(object):
 
     def __init__(self):
-        self.dbconnection = mdb.connect("localhost", "weiweilab", "weiweilab", "grasp")
+        self.dbconnection = mdb.connect("localhost", "root", "dlw", "grasp")
         self.cursor = self.dbconnection.cursor()
 
     def execute(self, sql):
@@ -22,7 +22,7 @@ class GraspDB(object):
         try:
             self.cursor.execute(sql)
         except mdb.Error as e:
-            print "MySQL Error [%d]: %s" % (e.args[0], e.args[1])
+            print("MySQL Error [" + str(e.args[0]) + "]: " + str(e.args[1]))
             self.dbconnection.rollback()
             raise mdb.Error
 
@@ -49,7 +49,7 @@ class GraspDB(object):
             self.cursor.execute("SET SQL_SAFE_UPDATES = 1")
             self.cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
         except mdb.Error as e:
-            print "MySQL Error [%d]: %s" % (e.args[0], e.args[1])
+            print("MySQL Error [" + str(e.args[0]) + "]: " + str(e.args[1]))
             self.dbconnection.rollback()
             self.cursor.execute("SET SQL_SAFE_UPDATES = 1")
             self.cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
@@ -96,7 +96,7 @@ class GraspDB(object):
     def loadIdHand(self, handname):
         sql = "SELECT idhand FROM hand WHERE name = '%s'" % handname
         result = self.execute(sql)
-        print result
+        print(result)
         if len(result) != 0:
             idhand = int(result[0][0])
         else:

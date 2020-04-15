@@ -78,7 +78,7 @@ if __name__ == '__main__':
     tic = time.clock()
     [path, sampledpoints] = planner.planning(obstaclelist = [objmnp])
     toc = time.clock()
-    print toc-tic
+    print(toc-tic)
     smoother = sm.Smoother()
     path = smoother.pathsmoothing(path, planner, 200)
 

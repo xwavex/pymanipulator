@@ -1,9 +1,9 @@
 import numpy as np
-import exceptions as ep
+# import exceptions as ep
 import utils.robotmath as rm
 import pandaplotutils.pandactrl as pandactrl
 import pandaplotutils.pandageom as pg
-import nxtik
+from . import nxtik
 
 class NxtRobot():
     def __init__(self):
@@ -79,7 +79,7 @@ class NxtRobot():
         """
 
         if armid!="rgt" and armid!="lft":
-            raise ep.ValueError
+            raise ValueError
 
         armjnts = self.__initjnts[3:9]
         if armid == "lft":
@@ -124,7 +124,7 @@ class NxtRobot():
     #     """
     #
     #     if armid!="rgt" and armid!="lft":
-    #         raise ep.ValueError
+    #         raise ValueError
     #
     #     armlj = self.rgtarm
     #     if armid == "lft":
@@ -149,7 +149,7 @@ class NxtRobot():
         """
 
         if armid!="rgt" and armid!="lft":
-            raise ep.ValueError
+            raise ValueError
 
         armlj = self.rgtarm
         if armid == "lft":
@@ -175,7 +175,7 @@ class NxtRobot():
         """
 
         if armid!="rgt" and armid!="lft":
-            raise ep.ValueError
+            raise ValueError
 
         armlj = self.rgtarm
         if armid == "lft":
@@ -262,7 +262,7 @@ class NxtRobot():
     #     """
     #
     #     if armid!="rgt" and armid!="lft":
-    #         raise ep.ValueError
+    #         raise ValueError
     #
     #     armlj = self.rgtarm
     #     if armid == "lft":
@@ -286,7 +286,7 @@ class NxtRobot():
         """
 
         if armid!="rgt" and armid!="lft":
-            raise ep.ValueError
+            raise ValueError
 
         armlj = self.rgtarm
         if armid == "lft":
@@ -326,7 +326,7 @@ class NxtRobot():
         """
 
         if armid!="rgt" and armid!="lft":
-            raise ep.ValueError
+            raise ValueError
 
         armlj = self.rgtarm
         if armid == "lft":
@@ -360,7 +360,7 @@ class NxtRobot():
         """
 
         if armid!="rgt" and armid!="lft":
-            raise ep.ValueError
+            raise ValueError
 
         armlj = self.rgtarm
         if armid == "lft":

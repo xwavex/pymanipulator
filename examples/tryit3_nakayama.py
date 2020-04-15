@@ -6,8 +6,38 @@ from pandaplotutils import pandactrl
 
 base = pandactrl.World(camp=[700, 300, 700], lookatp=[0, 0, 100])
 this_dir, this_filename = os.path.split(__file__)
-print this_dir
-objpath = os.path.join(this_dir, "../manipulation/grip/objects", "plane.stl")
+print(this_dir)
+
+# object_name = "planerearstay22"
+# object_name = "bunny16000"
+# object_name = "bunny17000"
+# object_name = "bunnysim"
+# object_name = "housingshaft"
+# object_name = "housing"
+# object_name = "planefrontstay"
+# object_name = "planelowerbody"
+# object_name = "planerearstay212"
+# object_name = "planerearstay215"
+# object_name = "planerearstay22"
+# object_name = "planerearstay23"
+# object_name = "planerearstay24"
+# object_name = "planerearstay26"
+# object_name = "planerearstay28"
+# object_name = "planerearstay2"
+# object_name = "planerearstay"
+# object_name = "plane"
+# object_name = "planewheel"
+# object_name = "sandpart2"
+# object_name = "sandpart"
+# object_name = "tool2"
+# object_name = "tool"
+# object_name = "ttube"
+
+# object_name = "weidmueller_clamp_1"
+object_name = "weidmueller_clamp_2"
+# object_name = "weidmueller_clamp_3"
+
+objpath = os.path.join(this_dir, "../manipulation/grip/objects", object_name + ".stl")
 # objnp = base.pg.loadstlaspandanp_fn(objpath)
 # objnp.reparentTo(base.render)
 # base.run()
@@ -24,10 +54,10 @@ freegriptst.removeHndcc(base, discretesize=16)
 gdb = db.GraspDB()
 freegriptst.saveToDB(gdb)
 #
-data = gdb.loadFreeAirGrip('plane', 'rtq85')
+data = gdb.loadFreeAirGrip(object_name, 'rtq85')
 if data:
     freegripid, freegripcontacts, freegripnormals, freegriprotmats, freegripjawwidth = data
-    print len(freegripid)
+    print(len(freegripid))
     for i, freegriprotmat in enumerate(freegriprotmats):
         # if i>120 and i-120 < 30:
         rtqhnd = rtq85nm.Rtq85NM(hndcolor=[1, 1, 1, .2])

@@ -6,7 +6,7 @@ from pandaplotutils import pandactrl
 
 base = pandactrl.World(camp=[700, 300, 700], lookatp=[0, 0, 100])
 this_dir, this_filename = os.path.split(__file__)
-print this_dir
+print(this_dir)
 objpath = os.path.join(this_dir, "../manipulation/grip/objects", "planerearstay22.stl")
 handpkg = rtq85nm
 
@@ -24,7 +24,7 @@ freegriptst.segShow(base, togglesamples=False, togglenormals=False,
 # data = gdb.loadFreeAirGrip('planerearstay22', 'rtq85')
 # if data:
 #     freegripid, freegripcontacts, freegripnormals, freegriprotmats, freegripjawwidth = data
-#     print len(freegripid)
+#     print(len(freegripid))
 #     for i, freegriprotmat in enumerate(freegriprotmats):
 #         # if i>120 and i-120 < 30:
 #         rtqhnd = rtq85nm.Rtq85NM(hndcolor=[1, 1, 1, .2])

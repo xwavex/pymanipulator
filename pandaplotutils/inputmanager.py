@@ -61,8 +61,8 @@ class InputManager(DirectObject):
 
         # This creates a collision plane
         self.aimPlaneCN = CollisionNode("aimPlaneCN")
-        # self.aimPlaneCN.addSolid(CollisionPlane(Plane(Vec3(0, 0, 1), self.lookatp)))
-        self.aimPlaneCN.addSolid(CollisionBox(Point3(self.lookatp[0], self.lookatp[1], 0), 1e12, 1e12, 1e-12))
+        self.aimPlaneCN.addSolid(CollisionPlane(Plane(Vec3(0, 0, 1), self.lookatp)))
+        # self.aimPlaneCN.addSolid(CollisionBox(Point3(self.lookatp[0], self.lookatp[1], 0), 1e12, 1e12, 1e-12))
         self.aimPlaneCN.setFromCollideMask(BitMask32.allOff())
         self.aimPlaneCN.setIntoCollideMask(BitMask32.bit(8))
         self.aimPlaneNP = self.pandabase.render.attachNewNode(self.aimPlaneCN)

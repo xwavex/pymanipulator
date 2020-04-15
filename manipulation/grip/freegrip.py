@@ -36,15 +36,15 @@ class Freegrip(fgcp.FreegripContactpairs):
             tic = time.time()
             self.removeBadSamples(mindist=2, maxdist=20)
             toc = time.time()
-            print "remove bad sample cost", toc-tic
+            print("remove bad sample cost", toc-tic)
             tic = time.time()
             self.clusterFacetSamplesRNN(reduceRadius=10)
             toc = time.time()
-            print "cluster samples cost", toc-tic
+            print("cluster samples cost", toc-tic)
             tic = time.time()
             self.planContactpairs(torqueresist,dotnormpara=dotnormpara)
             toc = time.time()
-            print "plan contact pairs cost", toc-tic
+            print("plan contact pairs cost", toc-tic)
             self.saveSerialized("tmpcp.pickle")
         else:
             self.loadSerialized("tmpcp.pickle", objpath)
@@ -70,8 +70,8 @@ class Freegrip(fgcp.FreegripContactpairs):
         self.bulletworld = BulletWorld()
         # prepare the model for collision detection
         self.objgeom = pandageom.packpandageom_fn(self.objtrimesh.vertices, self.objtrimesh.face_normals, self.objtrimesh.faces)
-        print "number of vertices", len(self.objtrimesh.vertices)
-        print "number of faces", len(self.objtrimesh.faces)
+        print("number of vertices", len(self.objtrimesh.vertices))
+        print("number of faces", len(self.objtrimesh.faces))
         self.objmeshbullnode = cd.genCollisionMeshGeom(self.objgeom)
         self.bulletworld.attachRigidBody(self.objmeshbullnode)
 
@@ -110,8 +110,8 @@ class Freegrip(fgcp.FreegripContactpairs):
         self.counter = 0
 
         while self.counter < self.facetpairs.shape[0]:
-            # print str(self.counter) + "/" + str(self.facetpairs.shape[0]-1)
-            # print self.gripcontactpairs_precc
+            # print(str(self.counter) + "/" + str(self.facetpairs.shape[0]-1))
+            # print(self.gripcontactpairs_precc)
 
             facetpair = self.facetpairs[self.counter]
             facetidx0 = facetpair[0]
@@ -176,8 +176,8 @@ class Freegrip(fgcp.FreegripContactpairs):
         self.counter = 0
 
         while self.counter < self.facetpairs.shape[0]:
-            # print str(self.counter) + "/" + str(self.facetpairs.shape[0]-1)
-            # print self.gripcontactpairs
+            # print(str(self.counter) + "/" + str(self.facetpairs.shape[0]-1))
+            # print(self.gripcontactpairs)
             self.gripcontactpairs_precc.append([])
             self.gripcontactpairnormals_precc.append([])
             self.gripcontactpairfacets_precc.append([])
@@ -236,15 +236,15 @@ class Freegrip(fgcp.FreegripContactpairs):
                 freeairgrip.idhand LIKE '%s'" % (idobject, idhand)
         result = gdb.execute(sql)
         if len(result) > 0:
-            print "Grasps already saved or duplicated filename!"
-            isredo = raw_input("Do you want to overwrite the database? (Y/N)")
+            print("Grasps already saved or duplicated filename!")
+            isredo = input("Do you want to overwrite the database? (Y/N)")
             if isredo != "Y" and isredo != "y":
-                print "Grasp planning aborted."
+                print("Grasp planning aborted.")
             else:
                 sql = "DELETE FROM freeairgrip WHERE freeairgrip.idobject LIKE '%s' AND \
                         freeairgrip.idhand LIKE '%s'"  % (idobject, idhand)
                 gdb.execute(sql)
-        print self.gripcontacts
+        print(self.gripcontacts)
         for i in range(len(self.gripcontacts)):
             sql = "INSERT INTO freeairgrip(idobject, contactpnt0, contactpnt1, \
                     contactnormal0, contactnormal1, rotmat, jawwidth, idhand) \
@@ -385,7 +385,7 @@ class Freegrip(fgcp.FreegripContactpairs):
         if self.counter >= self.facetpairs.shape[0]:
             return
         else:
-            print str(self.counter) + "/" + str(self.facetpairs.shape[0]-1)
+            print(str(self.counter) + "/" + str(self.facetpairs.shape[0]-1))
 
             facetpair = self.facetpairs[self.counter]
             facetidx0 = facetpair[0]
@@ -454,7 +454,7 @@ class Freegrip(fgcp.FreegripContactpairs):
         if self.counter2 >= discretesize:
             self.counter2 = 0
 
-        print str(self.counter) + "/" + str(self.facetpairs.shape[0]-1)
+        print(str(self.counter) + "/" + str(self.facetpairs.shape[0]-1))
 
         facetpair = self.facetpairs[self.counter]
         facetidx0 = facetpair[0]
@@ -462,7 +462,7 @@ class Freegrip(fgcp.FreegripContactpairs):
 
         for j, contactpair in enumerate(self.gripcontactpairs_precc[self.counter]):
             if j == 0:
-                print j, contactpair
+                print(j, contactpair)
                 # for angleid in range(discretesize):
                 angleid = self.counter2
                 cctpnt0 = contactpair[0] + plotoffsetfp * self.facetnormals[facetidx0]
@@ -532,7 +532,7 @@ class Freegrip(fgcp.FreegripContactpairs):
         date: 20170206
         """
 
-        print "num of grasps", len(self.gripcontacts)
+        print("num of grasps", len(self.gripcontacts))
         # for i in range(len(self.gripcontacts)):
         # # for i in range(2,3):
         #     hndrotmat = self.griprotmats[i]
@@ -613,7 +613,7 @@ if __name__=='__main__':
     #     freegriptst.removeFgrpcc(base)
     #     freegriptst.removeHndcc(base)
     #     toc = time.clock()
-    #     print toc-tic
+    #     print(toc-tic)
     #     fo.write(os.path.basename(objpath)+' '+str(toc-tic)+'\n')
     # fo.close()
 
@@ -641,7 +641,7 @@ if __name__=='__main__':
     # freegriptst.removeFgrpcc(base)
     # def updateshow(task):
     #     freegriptst.pairShow(base, togglecontacts=True, togglecontactnormals=True)
-    #     # print task.delayTime
+    #     # print(task.delayTime)
     #     # if abs(task.delayTime-13) < 1:
     #     #     task.delayTime -= 12.85
     #     return task.again
@@ -651,11 +651,11 @@ if __name__=='__main__':
     tic = time.time()
     freegriptst.removeFgrpcc(base)
     toc = time.time()
-    print "remove finger pre cc cost", toc-tic
+    print("remove finger pre cc cost", toc-tic)
     tic = time.time()
     freegriptst.removeHndcc(base, discretesize=16)
     toc = time.time()
-    print "remove hand cc cost", toc-tic
+    print("remove hand cc cost", toc-tic)
     # # #
     gdb = db.GraspDB()
     freegriptst.saveToDB(gdb)
@@ -664,7 +664,7 @@ if __name__=='__main__':
     #     # freegriptst.removeFgrpccShow(base)
     #     # freegriptst.removeFgrpccShowLeft(base)
     #     freegriptst.removeHndccShow(base)
-    # #     # print task.delayTime
+    # #     # print(task.delayTime)
     # #     # if abs(task.delayTime-13) < 1:
     # #     #     task.delayTime -= 12.85
     #     return task.again
@@ -696,7 +696,7 @@ if __name__=='__main__':
     data = gdb.loadFreeAirGrip('planerearstay22', 'rtq85')
     if data:
         freegripid, freegripcontacts, freegripnormals, freegriprotmats, freegripjawwidth = data
-        print len(freegripid)
+        print(len(freegripid))
         for i, freegriprotmat in enumerate(freegriprotmats):
             # if i>120 and i-120 < 30:
                 rtqhnd = rtq85nm.Rtq85NM(hndcolor=[1, 1, 1, .2])

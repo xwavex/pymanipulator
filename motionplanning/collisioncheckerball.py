@@ -38,9 +38,14 @@ class CollisionCheckerBall(object):
 
         bcndict = self.__robotball.genbcndict(robot)
 
-        if bcndict.has_key('body') and len(bcndict) > 1:
+        if 'body' in bcndict and len(bcndict) > 1:
             bodynp = None
             bodyarmcnp = NodePath("collision nodepath")
+            countdlw = 0
+            for key, bcn in bcndict.items():
+                countdlw = countdlw + 1
+                print("DLW " + str(countdlw) + ", key = " + str(key) + " : " + str(bcn))
+                # RACE CONDITION???????????
             for key, bcn in bcndict.items():
                 if key is 'body':
                     bodynp = bodyarmcnp.attachNewNode(bcn)
@@ -48,14 +53,16 @@ class CollisionCheckerBall(object):
                     bodyarmcnp.attachNewNode(bcn)
                 ctrav = CollisionTraverser()
                 chan = CollisionHandlerQueue()
+                print("aaa k = " + str(key) + ", bcn = " + str(bcn) + " : " + str(bodynp))
+                print("bbb " + str(chan))
                 ctrav.addCollider(bodynp, chan)
                 ctrav.traverse(bodyarmcnp)
                 if chan.getNumEntries() > 0:
-                    print "arm/hnd-body collision"
+                    print("arm/hnd-body collision")
                     return True
             bcndict.pop('body')
 
-        if bcndict.has_key('rgthnd') and len(bcndict) > 1:
+        if 'rgthnd' in bcndict and len(bcndict) > 1:
             rgthandnp = None
             rgthndarmcnp = NodePath("collision nodepath")
             for key, bcn in bcndict.items():
@@ -68,11 +75,11 @@ class CollisionCheckerBall(object):
                 ctrav.addCollider(rgthandnp, chan)
                 ctrav.traverse(rgthndarmcnp)
                 if chan.getNumEntries() > 0:
-                    print "rgthnd-arm collision"
+                    print("rgthnd-arm collision")
                     return True
             bcndict.pop('rgthnd')
 
-        if bcndict.has_key('lfthnd') and len(bcndict) > 1:
+        if 'lfthnd' in bcndict and len(bcndict) > 1:
             lfthandnp = None
             lfthndarmcnp = NodePath("collision nodepath")
             for key, bcn in bcndict.items():
@@ -85,7 +92,7 @@ class CollisionCheckerBall(object):
                 ctrav.addCollider(lfthandnp, chan)
                 ctrav.traverse(lfthndarmcnp)
                 if chan.getNumEntries() > 0:
-                    print "lfthnd-arm collision"
+                    print("lfthnd-arm collision")
                     return True
             bcndict.pop('lfthnd')
 
@@ -123,7 +130,7 @@ class CollisionCheckerBall(object):
                 ctrav.addCollider(obstaclenp, chan)
                 ctrav.traverse(robotcnp)
                 if chan.getNumEntries() > 0:
-                    print "obstacle-robot collision"
+                    print("obstacle-robot collision")
                     return True
                 # obstaclenp.reparentTo(base.render)
                 # obstaclenp.show()
@@ -164,5 +171,5 @@ if __name__=="__main__":
     robotball.showbcn(base, bcnlist)
 
     cdchecker = CollisionCheckerBall(robotball)
-    print cdchecker.isSelfCollided(robot)
+    print(cdchecker.isSelfCollided(robot))
     base.run()
